@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoopShopController;
 
 Route::get('/', [CoopShopController::class, 'index'])->name('coop-shop.home');
-Route::get('/danh-muc/{slug}', [CoopShopController::class, 'category'])->name('coop-shop.category');
+Route::get('/danh-muc/{id}', [CoopShopController::class, 'category'])->name('coop-shop.category');
 
 Route::get('/dang-nhap', [CoopShopController::class, 'login'])->name('coop-shop.login');
 Route::get('/gio-hang', [CoopShopController::class, 'cart'])->name('coop-shop.cart');

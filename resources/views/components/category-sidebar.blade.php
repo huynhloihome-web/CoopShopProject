@@ -1,33 +1,29 @@
+@props([
+    'categories' => [],
+    'activeCategoryId' => 0,
+    'sort' => ''
+])
+
 <aside class="category-sidebar">
     <div class="category-sidebar__header">
         DANH MỤC
     </div>
 
     <ul class="category-list">
-        {{-- Layout tĩnh. Sau này thay bằng @foreach lấy từ database --}}
-        <li class="category-item">
-            <a href="javascript:void(0)">Rau củ quả <i class="bi bi-chevron-right"></i></a>
+        <li class="category-item {{ $activeCategoryId == 0 ? 'is-active' : '' }}">
+            <a href="{{ $sort != '' ? route('coop-shop.home', ['sort' => $sort]) : route('coop-shop.home') }}">
+                <span>Tất cả sản phẩm</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
         </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Trái cây <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Thịt sạch <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Thủy hải sản <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Gia vị <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Gạo và ngũ cốc <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Đồ uống <i class="bi bi-chevron-right"></i></a>
-        </li>
-        <li class="category-item">
-            <a href="javascript:void(0)">Sữa và trứng <i class="bi bi-chevron-right"></i></a>
-        </li>
+
+        @foreach ($categories as $category)
+            <li class="category-item {{ $activeCategoryId == $category->id ? 'is-active' : '' }}">
+                <a href="{{ $sort != '' ? route('coop-shop.category', ['id' => $category->id, 'sort' => $sort]) : route('coop-shop.category', ['id' => $category->id]) }}">
+                    <span>{{ $category->ten }}</span>
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+        @endforeach
     </ul>
 </aside>
